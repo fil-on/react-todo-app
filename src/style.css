@@ -138,6 +138,7 @@ input[type='checkbox'] {
   border: none;
   font-size: 17px;
   color: #fff;
+  cursor: pointer;
 }
 
 .deleteAll:hover {
@@ -151,6 +152,7 @@ input[type='checkbox'] {
   line-height: 15px;
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 .deleteTodo:hover {
