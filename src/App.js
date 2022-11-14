@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import './style.css';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { AiFillDelete } from 'react-icons/ai';
-import { TiDelete } from 'react-icons/ti';
+import React, { useState, useEffect } from "react";
+import "./style.css";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
+import { TiDelete } from "react-icons/ti";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
-  const [inputTodo, setInputTodo] = useState('');
+  const [inputTodo, setInputTodo] = useState("");
 
   const handleInput = (e) => {
     setInputTodo(e.target.value);
@@ -18,11 +18,12 @@ const App = () => {
     todo.complete = !todo.complete;
 
     setTodos(newTodos);
-
   };
 
   const checkAll = (value) => {
-    const newTodos = [...todos].map(e => {return {...e, complete: !value}})
+    const newTodos = [...todos].map((e) => {
+      return { ...e, complete: !value };
+    });
 
     setTodos(newTodos);
   };
@@ -33,11 +34,11 @@ const App = () => {
   };
 
   const deleteAll = () => {
-    const newTodos = [...todos].filter(todo => !todo.complete)
+    const newTodos = [...todos].filter((todo) => !todo.complete);
     setTodos(newTodos);
   };
   const handleSubmit = (e) => {
-    if (inputTodo == '') {
+    if (inputTodo == "") {
       e.preventDefault();
       return;
     } else {
@@ -52,14 +53,13 @@ const App = () => {
         ];
       });
     }
-    setInputTodo('');
+    setInputTodo("");
     e.preventDefault();
   };
 
   return (
     <>
       <div className="container">
-        {/* <span>{JSON.stringify(todos)}</span> */}
         <form onSubmit={handleSubmit} className="inputDiv">
           <input
             onChange={handleInput}
@@ -84,31 +84,34 @@ const App = () => {
 };
 
 const TodoList = ({ todos, handleChange, checkAll, deleteTodo, deleteAll }) => {
-
-  const [check, setCheck] = useState(false)
+  const [check, setCheck] = useState(false);
 
   const handleCheckAll = (e) => {
-    const value = check
-    setCheck(!value)
+    const value = check;
+    setCheck(!value);
     checkAll(check);
   };
 
   const handleDeleteAll = () => {
-    deleteAll()
-    setCheck(false)
-  }
+    deleteAll();
+    setCheck(false);
+  };
   return (
     <>
       <div className="todoListDiv">
-        <h3>Todo's</h3>
+        <h3>Todos</h3>
         <p className="status">
-          {todos.length} total, {todos.filter((e) => e.complete).length}{' '}
+          {todos.length} total, {todos.filter((e) => e.complete).length}{" "}
           complete and {todos.filter((e) => !e.complete).length} pending
         </p>
         <div className="tableDiv">
           <div className="tableHeadDiv">
             <div className="tableHead">
-              <input checked={check} type="checkbox" onChange={handleCheckAll} />
+              <input
+                checked={check}
+                type="checkbox"
+                onChange={handleCheckAll}
+              />
               <p>Todo Title</p>
               <p>Status</p>
               <button onClick={handleDeleteAll} className="deleteAll">
@@ -145,7 +148,7 @@ const TodoItem = ({ todo, handleChange, deleteTodo }) => {
     <>
       <div
         className="todoItem"
-        style={!todo.complete ? { backgroundColor: '#fff' } : {}}
+        style={!todo.complete ? { backgroundColor: "#fff" } : {}}
       >
         <input
           onChange={changeComplete}
@@ -156,13 +159,17 @@ const TodoItem = ({ todo, handleChange, deleteTodo }) => {
         <label
           className="todoContent"
           onClick={changeComplete}
-          style={todo.complete ? { textDecoration: `line-through` } : {}}
+          style={
+            todo.complete
+              ? { textDecoration: `line-through`, color: "grey" }
+              : {}
+          }
           HTMLfor={todo.id}
         >
           {todo.content}
         </label>
         <div className="todoStatus">
-          {todo.complete ? 'Complete' : 'Pending'}
+          {todo.complete ? "Complete" : "Pending"}
         </div>
         <button onClick={handleDelete} className="deleteTodo">
           <TiDelete />
